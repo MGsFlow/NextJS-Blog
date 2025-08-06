@@ -1,6 +1,4 @@
-# 파스텔톤 포트폴리오 블로그 ✨
-
-ReactBits.dev에서 영감을 받은 멋진 효과들과 파스텔톤의 아기자기한 디자인이 적용된 포트폴리오 블로그입니다.
+# 파스텔톤 포트폴리오 방명록 ✨
 
 ## 🎨 특징
 
@@ -11,6 +9,7 @@ ReactBits.dev에서 영감을 받은 멋진 효과들과 파스텔톤의 아기�
 - **Supabase 연동**: 실시간 데이터베이스 연동
 - **Framer Motion**: 부드러운 애니메이션
 - **반응형 디자인**: 모든 디바이스에서 최적화
+- **방명록 시스템**: 발행/미발행 상태 관리
 
 ## 🚀 시작하기
 
@@ -35,7 +34,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
 Supabase에서 다음 테이블을 생성하세요:
 
 ```sql
--- posts 테이블
+-- posts 테이블 (방명록)
 CREATE TABLE posts (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   title TEXT NOT NULL,
@@ -66,8 +65,6 @@ CREATE POLICY "Allow authenticated insert" ON posts
 npm run dev
 ```
 
-브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어 확인하세요.
-
 ## 📁 프로젝트 구조
 
 ```
@@ -76,35 +73,53 @@ blog/
 │   ├── app/                 # Next.js App Router
 │   │   ├── layout.tsx      # 메인 레이아웃
 │   │   ├── page.tsx        # 홈페이지
-│   │   ├── write/          # 포스트 작성 페이지
+│   │   ├── write/          # 방명록 작성 페이지
+│   │   ├── edit/           # 방명록 편집 페이지
+│   │   ├── guestbook/      # 방명록 목록/상세 페이지
+│   │   ├── admin/          # 관리자 페이지
+│   │   ├── portfolio/      # 포트폴리오 페이지
 │   │   └── globals.css     # 글로벌 스타일
 │   ├── components/         # 재사용 가능한 컴포넌트
 │   │   ├── Navigation.tsx  # 네비게이션
+│   │   ├── LoadingPage.tsx # 로딩 페이지
+│   │   ├── SuccessAlert.tsx # 성공 알림
 │   │   └── animations/     # 애니메이션 컴포넌트
 │   ├── store/             # Zustand 스토어
-│   │   └── blogStore.ts   # 블로그 상태 관리
+│   │   └── blogStore.ts   # 방명록 상태 관리
 │   └── theme/             # MUI 테마
 │       └── pastelTheme.ts # 파스텔톤 테마
+├── public/                # 정적 파일
+│   ├── MGsFlow_이력서.pdf # 이력서 파일
+│   └── mgflow.png        # 프로필 이미지
 ```
 
 ## 🎯 주요 기능
 
 ### 홈페이지
 - 애니메이션이 있는 히어로 섹션
-- 최신 포스트 그리드 뷰
+- 최신 방명록 그리드 뷰
 - 소셜 미디어 링크
 - 파스텔톤 그라데이션 효과
+- 이력서 다운로드 기능
 
-### 포스트 작성
-- 마크다운 에디터
-- 실시간 미리보기
-- 태그 관리
-- 이미지 업로드 (준비 중)
+### 방명록 시스템
+- **작성**: 마크다운 에디터로 방명록 작성
+- **편집**: 기존 방명록 수정
+- **발행 관리**: 발행/미발행 상태 관리
+- **관리자 페이지**: 미발행 방명록 관리
+- **실시간 미리보기**: 작성 중 실시간 미리보기
+
+### 포트폴리오 페이지
+- 경력 정보 및 프로젝트 소개
+- 기술 스택 시각화
+- 핵심 역량 및 개발 철학
+- 애니메이션 효과
 
 ### 애니메이션 효과
 - **Floating Hearts**: 떠다니는 하트 애니메이션
 - **Glowing Cursor**: 마우스 커서 글로우 효과
 - **Parallax Background**: 스크롤 기반 파라랙스 배경
+- **Framer Motion**: 부드러운 페이지 전환
 
 ## 🎨 색상 팔레트
 
@@ -124,40 +139,40 @@ blog/
 - **Animations**: Framer Motion
 - **Forms**: React Hook Form + Zod
 - **Styling**: Emotion (MUI 기본)
+- **Markdown**: React Markdown
 
 ## 📝 사용법
 
-1. **포스트 작성**: `/write` 페이지에서 새 포스트를 작성하세요
-2. **포스트 보기**: 홈페이지에서 최신 포스트를 확인하세요
-3. **네비게이션**: 상단 네비게이션을 통해 다른 페이지로 이동하세요
+### 방명록 관리
+1. **방명록 작성**: `/write` 페이지에서 새 방명록을 작성하세요
+2. **방명록 보기**: 홈페이지에서 최신 방명록을 확인하세요
+3. **방명록 목록**: `/guestbook` 페이지에서 모든 방명록을 확인하세요
+4. **관리자 기능**: `/admin` 페이지에서 미발행 방명록을 관리하세요
 
-## 🚀 배포
+### 포트폴리오
+1. **포트폴리오 보기**: `/portfolio` 페이지에서 경력과 프로젝트를 확인하세요
+2. **이력서 다운로드**: 홈페이지에서 이력서를 다운로드하세요
 
-### Vercel 배포 (권장)
+### 네비게이션
+- 상단 네비게이션을 통해 다른 페이지로 이동하세요
+- 반응형 디자인으로 모바일에서도 편리하게 사용할 수 있습니다
 
-1. GitHub에 코드를 푸시하세요
-2. Vercel에서 프로젝트를 연결하세요
-3. 환경 변수를 설정하세요
-4. 배포하세요!
 
-### 다른 플랫폼
 
-```bash
-npm run build
-npm start
-```
+## 🔐 관리자 기능
 
-## 🤝 기여하기
+### 관리자 로그인
+- URL: `/admin`
+- 비밀번호: `admin123`
+- 미발행 방명록 관리
+- 방명록 삭제 기능
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+### 발행 상태 관리
+- **발행된 방명록**: 홈페이지와 방명록 목록에 표시
+- **미발행 방명록**: 관리자 페이지에서만 확인 가능
+- **시각적 구분**: 미발행 방명록은 흐리게 표시
 
-## 📄 라이선스
 
-이 프로젝트는 MIT 라이선스 하에 배포됩니다.
 
 ## 🙏 감사의 말
 
@@ -167,5 +182,3 @@ npm start
 - [Supabase](https://supabase.com/) - 실시간 데이터베이스
 
 ---
-
-💖 파스텔톤의 아기자기한 블로그를 즐겨보세요!
