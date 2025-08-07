@@ -442,7 +442,6 @@ export default function EditPage() {
                 value={deletePassword}
                 onChange={(e) => setDeletePassword(e.target.value)}
                 fullWidth
-                placeholder="admin123"
               />
             </DialogContent>
             <DialogActions>
