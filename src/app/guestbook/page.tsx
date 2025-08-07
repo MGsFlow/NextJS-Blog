@@ -235,7 +235,7 @@ export default function BlogListPage() {
                           whileHover={{ y: -5 }}
                           transition={{ duration: 0.3 }}
                         >
-                          <Link href={`/blog/${post.id}`} passHref style={{ textDecoration: 'none' }}>
+                          <Link href={`/guestbook/${post.id}`} passHref style={{ textDecoration: 'none' }}>
                             <Card
                               sx={{
                                 height: 400,
