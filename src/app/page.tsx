@@ -290,7 +290,7 @@ export default function Home() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                   >
-                    <Link href={`/blog/${post.id}`} passHref style={{ textDecoration: 'none' }}>
+                    <Link href={`/guestbook/${post.id}`} passHref style={{ textDecoration: 'none' }}>
                       <Card
                         sx={{
                           height: 350,
